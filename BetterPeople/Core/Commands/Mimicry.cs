@@ -30,7 +30,7 @@ namespace BetterPeople.Core.Commands
 
 
             Targets.TargetList.Remove(Targets.TargetList.Find(x => x.ServerId == Context.Guild.Id));
-            Targets.TargetList.Add(new Target(Context.Guild.Id, User));
+            Targets.TargetList.Add(new Target(Context.Guild.Id, User.Id));
 
             string become = "\\**smokebombs** now I became a better " + User.Mention;
             await Context.Channel.SendMessageAsync(become);

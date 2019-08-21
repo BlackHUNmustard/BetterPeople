@@ -11,18 +11,16 @@ namespace BetterPeople.Data
         public ulong ClientId;
         public string TargetUser;
 
-        public Target(ulong serverid, ulong clientid, string targetuser)
+        public Target(ulong serverid, ulong clientid)
         {
             ServerId = serverid;
             ClientId = clientid;
-            TargetUser = targetuser;
         }
 
         public Target(ulong serverid, IUser User)
         {
             ServerId = serverid;
             ClientId = User.Id;
-            TargetUser = User.Username;
         }
     }
 }
