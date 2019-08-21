@@ -71,9 +71,11 @@ namespace BetterPeople
             if (!Message.HasStringPrefix("bp.", ref ArgPos))
             {
                 Target localtarget = Targets.TargetList.Find(x => x.ServerId == Context.Guild.Id);
-                if (Targets.TargetList.Exists(x => x.ServerId == Context.Guild.Id))
-                    if (Targets.TargetList.Exists(x => x.ClientId == Context.User.Id))
-                        await Context.Channel.SendMessageAsync(Context.Message.Content);
+                if (Targets.TargetList.Exists(x => x.ClientId == Context.User.Id))
+                {
+                    await Context.Channel.SendMessageAsync(Context.Message.Content);
+                    await Context.Message.DeleteAsync();
+                }
                 return;
             }
 
