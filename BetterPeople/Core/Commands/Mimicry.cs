@@ -28,6 +28,12 @@ namespace BetterPeople.Core.Commands
                 return;
             }
 
+            IGuildUser sender = Context.User as IGuildUser;
+            if (!sender.GuildPermissions.Administrator)
+            {
+                await Context.Channel.SendMessageAsync("You need to be an administrator");
+            }
+
 
             Targets.TargetList.Remove(Targets.TargetList.Find(x => x.ServerId == Context.Guild.Id));
             Targets.TargetList.Add(new Target(Context.Guild.Id, User.Id));
@@ -59,6 +65,13 @@ namespace BetterPeople.Core.Commands
         [Command("stopit"), Alias("staph"), Summary("Become yourself")]
         public async Task stop()
         {
+            IGuildUser sender = Context.User as IGuildUser;
+            if (!sender.GuildPermissions.Administrator)
+            {
+                await Context.Channel.SendMessageAsync("You need to be an administrator");
+            }
+
+
             IGuildUser Client = Context.Guild.GetUser(611889386874732544);
 
             await Client.ModifyAsync(x => x.Nickname = Client.Username);
